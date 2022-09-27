@@ -147,4 +147,5 @@ cd k8s-ilg-min
 
 **Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 5 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 5 (menys de 5) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``.
 
+> Per a saber quines i quantes imatges de docker que contenen al nom **entorn** tenim descarregades, podem executar la següent comanda: ``docker images | grep entorn``. N'hem de tenir 5 (en cas contrari, cal executar de nou ``./entorn-pull.sh``)
 

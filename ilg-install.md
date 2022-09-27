@@ -123,3 +123,28 @@ sudo apt-get install helm
 
 ```
 
+
+### Instal·lació de l'Entorn
+
+Obrim un PowerShell com a Administrador, i executem:
+
+```
+d:\
+mkdir entorn
+attrib +h entorn
+```
+
+Obrim un terminal d'Ubuntu i executem:
+
+```
+cd /mnt/d/entorn
+git clone https://github.com/entorn-io/k8s-ilg-min.git
+cd k8s-ilg-min
+./entorn-pull.sh
+./entorn-install.sh
+./entorn-start.sh
+```
+
+**Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 5 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 5 (menys de 5) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``.
+
+

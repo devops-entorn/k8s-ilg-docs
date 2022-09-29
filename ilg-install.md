@@ -141,11 +141,40 @@ cd /mnt/d/entorn
 git clone https://github.com/entorn-io/k8s-ilg-min.git
 cd k8s-ilg-min
 ./entorn-pull.sh
+```
+
+**Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 5 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 5 (menys de 5) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``. L'script ja us informarà si cal tornar-lo a executar o no.
+
+> Per a saber quines i quantes imatges de docker que contenen al nom **entorn** tenim descarregades, podem executar la següent comanda: ``docker images | grep entorn``. N'hem de tenir 5 (en cas contrari, cal executar de nou ``./entorn-pull.sh``)
+
+A continuació, un cop descarregades totes cinc imatges de docker, cal executar (en el mateix terminal d'Ubuntu):
+
+```
+cd /mnt/d/entorn
 ./entorn-install.sh
 ./entorn-start.sh
 ```
 
-**Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 5 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 5 (menys de 5) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``.
+### El meu Windows es queda congelat (es penja) durant el pull de les imatges de docker (en executar ./entorn-pull.sh)
 
-> Per a saber quines i quantes imatges de docker que contenen al nom **entorn** tenim descarregades, podem executar la següent comanda: ``docker images | grep entorn``. N'hem de tenir 5 (en cas contrari, cal executar de nou ``./entorn-pull.sh``)
+En aquest cas, canvieu la següent configuració de Docker Desktop:
 
+Docker Engine > afegiu ``"max-concurrent-downloads": 1``. Us quedaria així:
+
+```
+{
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "experimental": true,
+  "max-concurrent-downloads": 1,
+  "features": {
+    "buildkit": true
+  }
+}
+```
+
+Un cop modificada la configuració, no oblideu d'aplicar els canvis (_Apply & Restart_)

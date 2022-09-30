@@ -129,7 +129,7 @@ sudo apt-get install helm
 Obrim un PowerShell com a Administrador, i executem:
 
 ```
-d:\
+cd d:\
 mkdir entorn
 attrib +h entorn
 ```

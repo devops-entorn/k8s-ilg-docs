@@ -84,7 +84,7 @@ En aquest entorn podeu treballar amb els següents notebooks:
 
 ## Aplicacions disponibles via Jupyterlab
 
-A través de la interfície web de jupyterlab podem tenim disponibles les següents aplicacions:
+A través de la **interfície web de jupyterlab** podem tenim disponibles les següents aplicacions:
 
 - Entorn (tots els perfils):
     - **Ubuntu Desktop**
@@ -106,11 +106,7 @@ A través de la interfície web de jupyterlab podem tenim disponibles les següe
     - **Jenkins**
 
 
-
-
-
-
-
+Altres aplicacions accessibles des de l'Escriptori (_**Desktop**_):
 
 - **Jetbrains IDEs**: Cross-platform Jetbrains IDEs.
 - **Eclipse**: IDE Eclipse.
@@ -119,5 +115,3 @@ A través de la interfície web de jupyterlab podem tenim disponibles les següe
 - **MySQL Workbench**: client desktop app for MySQL.
 - **Postman**: eina per a Rest APIs.
 - **Pencil Project**: Wireframes i diagrames.
-
-- **Browser**: Navegador web per a consultes locals.

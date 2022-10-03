@@ -150,7 +150,7 @@ cd k8s-ilg-min
 A continuació, un cop descarregades totes cinc imatges de docker, cal executar (en el mateix terminal d'Ubuntu):
 
 ```
-cd /mnt/d/entorn
+cd /mnt/d/entorn/k8s-ilg-min
 ./entorn-install.sh
 ./entorn-start.sh
 ```

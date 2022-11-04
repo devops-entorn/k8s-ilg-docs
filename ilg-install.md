@@ -39,7 +39,7 @@ A continuació, descarreguem i instal·lem el següent paquet:
 **Establim la versió 2 de WSL com a versió per defecte**: obrim PowerShell com a administrador, i executem:
 
 ```
-wsl –set-default-version 2
+wsl --set-default-version 2
 ```
 
 
@@ -65,6 +65,18 @@ Si la versió d'Ubuntu que s'ha instal·lat és la 22.04 (per exemple), executar
 ```
 wsl --set-version Ubuntu-22.04 2
 ```
+
+Per a saber quines versions d'Ubuntu (o d'altres) tenim instal·lades a WSL, a PowerShell podem escriure:
+
+```
+wsl --list
+```
+
+### Com limitar el consum de memòria per part de WSL
+
+WSL consumirà, per defecte, tota la memòria que estigui disponible o lliure. Però es pot limitar, seguint les següents instruccions que trobareu [aquí](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/).
+
+**Atenció**: Docker Desktop necessitarà almenys 6Gb de memòria RAM, per tant, no limiteu la memòria de WSL per sota d'aquest valor.
 
 
 ### Instal·lació de Docker Desktop
@@ -126,6 +138,10 @@ sudo apt-get install helm
 
 ### Instal·lació de l'Entorn
 
+Cal instal·lar l'entorn en un disc que tingui com més espai lliure millor (mínim 25 a 30 Gb, tot i que amb 20 Gb ja podria funcionar).
+
+En aquest exemple, estem suposant que la unitat D: (sistema Windows) és la unitat que té més espai lliure. Si no tens una unitat D:, escull una altra.
+
 Obrim un PowerShell com a Administrador, i executem:
 
 ```
@@ -138,22 +154,43 @@ Obrim un terminal d'Ubuntu i executem:
 
 ```
 cd /mnt/d/entorn
-git clone https://github.com/entorn-io/k8s-ilg-min.git
-cd k8s-ilg-min
+git clone https://github.com/entorn-io/klocal-ddesk-ilg-min.git
+cd klocal-ddesk-ilg-min
 ./entorn-pull.sh
 ```
 
-**Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 5 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 5 (menys de 5) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``. L'script ja us informarà si cal tornar-lo a executar o no.
+**Atenció**: quan executeu ``./entorn-pull.sh`` es descarregueran de dockerhub 3 imatges de docker. En finalitzar aquest script se us mostraran les imatges descarregades. Si no en són 3 (menys de 3) cal executar de nou aquest script abans d'executar el següent script ``./entorn-install.sh``. L'script ja us informarà si cal tornar-lo a executar o no.
 
-> Per a saber quines i quantes imatges de docker que contenen al nom **entorn** tenim descarregades, podem executar la següent comanda: ``docker images | grep entorn``. N'hem de tenir 5 (en cas contrari, cal executar de nou ``./entorn-pull.sh``)
+> Per a saber quines i quantes imatges de docker que contenen al nom **entorn** tenim descarregades, podem executar la següent comanda: ``docker images | grep entorn``. N'hem de tenir 3 (en cas contrari, cal executar de nou ``./entorn-pull.sh``)
 
 A continuació, un cop descarregades totes cinc imatges de docker, cal executar (en el mateix terminal d'Ubuntu):
 
 ```
-cd /mnt/d/entorn/k8s-ilg-min
+cd /mnt/d/entorn/klocal-ddesk-ilg-min
 ./entorn-install.sh
 ./entorn-start.sh
 ```
+
+### Actualització de l'Entorn
+
+Si voleu actualitzar l'entorn, cal tornar a clonar el repositori amb ``git clone`` (perquè pugui clonar caldrà eliminar primer el directori de la versió antiga), i un cop clonat, executar de nou els scripts:
+
+```
+cd /mnt/d/entorn
+rm -rf klocal-ddesk-ilg-min
+git clone https://github.com/entorn-io/klocal-ddesk-ilg-min.git
+cd klocal-ddesk-ilg-min
+./entorn-pull.sh
+./entorn-install.sh
+./entorn-start.sh
+```
+
+
+## Troubleshooting
+
+### Consum excesiu de memòria per part de Docker Desktop
+
+Cal limitar la memòria consumida per WSL2, que és el responsable de l'ús de la memòria. A munt, en un apartat anterior d'aquest document, ho teniu explicat.
 
 ### El meu Windows es queda congelat (es penja) durant el pull de les imatges de docker (en executar ./entorn-pull.sh)
 
@@ -178,3 +215,17 @@ Docker Engine > afegiu ``"max-concurrent-downloads": 1``. Us quedaria així:
 ```
 
 Un cop modificada la configuració, no oblideu d'aplicar els canvis (_Apply & Restart_)
+
+### Quan arrenco l'entorn, la barra de progrés no avança
+
+Això passa perquè l'anterior vegada que es va arrencar l'entorn, no es va tancar correctament.
+
+> Per a tancar l'entorn correctament, abans de tancar el navegador, a la web del JupyterLab heu d'anar al menú a ``File -> Hub Control Panel`` i un cop al Hub, clicar a "Stop My Server".
+
+Per a poder solucionar aquest problema, cal executar en un terminal bash d'Ubuntu la següent comanda, que reseteja l'entorn i ja el podreu tornar a arrencar amb normalitat:
+
+```
+entorn reset
+``` 
+
+

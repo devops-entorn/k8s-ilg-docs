@@ -74,9 +74,13 @@ wsl --list
 
 ### Com limitar el consum de memòria per part de WSL
 
-WSL consumirà, per defecte, tota la memòria que estigui disponible o lliure. Però es pot limitar, seguint les següents instruccions que trobareu [aquí](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/).
+Lús de memòria per part de WSL és, per defecte, el següent:
 
-**Atenció**: Docker Desktop necessitarà almenys 6Gb de memòria RAM, per tant, no limiteu la memòria de WSL per sota d'aquest valor.
+> _50% of total memory on Windows or 8GB, whichever is less; on builds before 20175: 80% of your total memory on Windows_
+
+Per tant, consumeix molta memòria! Però es pot limitar, seguint les següents instruccions que trobareu [aquí](https://www.aleksandrhovhannisyan.com/blog/limiting-memory-usage-in-wsl-2/) o [aquí](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig).
+
+**Atenció**: Per a executar l'Entorn, Docker Desktop necessitarà almenys 6Gb de memòria RAM, per tant, no limiteu la memòria de WSL per sota d'aquest valor.
 
 
 ### Instal·lació de Docker Desktop
